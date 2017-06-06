@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>板块分类</title>
+    {{template "headSet"}}
+</head>
+<body>
+{{template "headMenu" .}}
+<div class = "container">
+    <script type="text/javascript">
+        function checkName() {
+            var name = $("#name").val();
+            if(name){
+                return true;
+            }
+            return false;
+        }
+    </script>
+    <h1>添加分类</h1>
+    <form action="/category" method="post">
+        <label>分类名称</label>
+        <input type="text" id="name" class="form-control" placeholder="添加名称" name="name">
+        <button type="submit" onclick="return checkName()">添加</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>文章数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range .Categories}}
+        <tr>
+            <td>{{.Id}}</td>
+            <td>{{.Title}}</td>
+            <td>{{.TopicCount}}</td>
+            <td><a href="/deleteCategory?id={{.Id}}">删除</a></td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
